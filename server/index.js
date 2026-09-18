@@ -7,8 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const JWT_SECRET = 'dev-secret';
-const users = [];   // { id, email, passwordHash, role }
+const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
+const users = [];
+const orders = [];
+
 const games = [
   { id: 1, title: 'Resident Evil 4 Remake', price: 3499, image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg', description: 'Ремейк культового хоррора про Леона Кеннеди.', genre: 'Survival Horror' },
   { id: 2, title: 'Resident Evil Village', price: 2999, image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg', description: 'Итан Уинтерс и леди Димитреску.', genre: 'Survival Horror' },
@@ -39,9 +41,9 @@ const games = [
   { id: 27, title: 'Phasmophobia', price: 899, image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/739630/header.jpg', description: 'Кооперативный хоррор про призраков.', genre: 'Co-op Horror' },
   { id: 28, title: 'Lethal Company', price: 399, image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header.jpg', description: 'Кооп-хоррор про сбор мусора на лунах.', genre: 'Co-op Horror' },
 ];
-const orders = [];
+
 let nextUserId = 1;
-let nextGameId = 30;
+let nextGameId = 100;
 let nextOrderId = 1;
 
 function auth(req, res, next) {
@@ -136,4 +138,7 @@ app.get('/api/orders/my', auth, (req, res) => {
   res.json(orders.filter(o => o.userId === req.user.id));
 });
 
-app.listen(8080, () => console.log('API ready: http://localhost:8080/api'));
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`API ready: http://localhost:${PORT}/api`);
+});

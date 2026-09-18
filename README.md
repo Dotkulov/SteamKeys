@@ -1,1 +1,0 @@
-npm config set registry https://npm-mirror.gitverse.ru
