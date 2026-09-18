@@ -1,0 +1,198 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0f1720;
+  color: #e6edf3;
+}
+a { color: #66b3ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 24px; background: #171f2b;
+  border-bottom: 1px solid #232c3a;
+}
+.navbar .logo { font-weight: bold; font-size: 20px; color: #fff; }
+.nav-links, .nav-auth { display: flex; gap: 16px; align-items: center; }
+.nav-auth .user-email { color: #9aa7b8; font-size: 14px; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+/* ---------- Сетка каталога ---------- */
+.grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  margin-top: 16px;
+  align-items: stretch;   /* карточки одной высоты */
+}
+
+/* ---------- Карточка ---------- */
+.card {
+  background: #1b2532;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #263243;
+  transition: transform .15s, border-color .15s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;           /* растягиваем на всю ячейку */
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #388bfd;
+}
+.card-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  background: #0b1017;
+  flex-shrink: 0;
+}
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;                /* занимаем всё оставшееся место */
+}
+
+/* Название — максимум 2 строки, чтобы не растягивало карточку */
+.card-body h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 39px;       /* 2 строки * 1.3em ≈ резерв под высоту */
+}
+
+/* Жанр под названием (если добавите — на одной строке) */
+.card-body .genre-line {
+  font-size: 12px;
+  color: #9aa7b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price { font-weight: 600; color: #7ee787; margin: 0; }
+.price.big { font-size: 22px; }
+
+/* Кнопка на карточке всегда прижата к низу → все кнопки на одной высоте */
+.card-body .btn {
+  margin-top: auto;
+}
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  transition: background .15s;
+}
+.btn:hover { background: #388bfd; text-decoration: none; }
+.btn.primary { background: #238636; }
+.btn.primary:hover { background: #2ea043; }
+.btn.small { padding: 4px 10px; font-size: 13px; }
+
+button { cursor: pointer; }
+
+/* ---------- Поиск ---------- */
+.search {
+  width: 100%; padding: 10px; margin-top: 12px;
+  background: #0f1720; border: 1px solid #263243;
+  color: #e6edf3; border-radius: 6px;
+}
+.search:focus { outline: none; border-color: #388bfd; }
+
+/* ---------- Формы ---------- */
+.form { display: flex; flex-direction: column; gap: 10px; max-width: 380px; }
+.form input, .form textarea {
+  padding: 10px; background: #0f1720; border: 1px solid #263243;
+  color: #e6edf3; border-radius: 6px; font-family: inherit;
+}
+.form input:focus, .form textarea:focus {
+  outline: none; border-color: #388bfd;
+}
+.form textarea { min-height: 80px; resize: vertical; }
+.form button {
+  padding: 10px; background: #1f6feb; border: none;
+  color: #fff; border-radius: 6px;
+}
+.form-page { max-width: 420px; }
+
+.error { color: #ff6b6b; }
+.success { color: #7ee787; }
+
+/* ---------- Детали игры ---------- */
+.game-details { display: grid; grid-template-columns: 360px 1fr; gap: 24px; }
+.game-details img { width: 100%; border-radius: 10px; }
+.genre { color: #9aa7b8; font-size: 14px; }
+
+/* ---------- Таблицы ---------- */
+.table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.table th, .table td {
+  padding: 10px 12px; border-bottom: 1px solid #263243; text-align: left;
+  vertical-align: middle;
+}
+.table th { color: #9aa7b8; font-weight: 500; font-size: 13px; text-transform: uppercase; }
+.table code { background: #0b1017; padding: 2px 6px; border-radius: 4px; }
+
+/* ============================================================
+   ЕДИНЫЙ СТИЛЬ ДЛЯ КЛЮЧЕЙ
+   Используется и на странице "Мои покупки", и в GameDetails
+   ============================================================ */
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Consolas", "Menlo", "Courier New", monospace;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #7ee787;
+  background: #0b1017;
+  border: 1px solid #1f6feb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.key:hover {
+  border-color: #388bfd;
+}
+
+/* Блок с ключом под кнопкой "Купить" */
+.key-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 14px;
+  background: #121a25;
+  border: 1px solid #238636;
+  border-radius: 10px;
+}
+.key-box .key-label {
+  color: #9aa7b8;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.key-box .key-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
